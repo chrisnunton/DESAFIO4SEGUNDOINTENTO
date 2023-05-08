@@ -7,20 +7,23 @@ const productManager = new ProductManager("products.json");
 const router = Router();
 
 router.get("/", async(req,res)=>{
-    try {
-        const limit = req.query.limit;
-        const products = await productManager.getProducts();
-        if (limit) {
-            res.json({ status: 'success', data: products.slice(0, limit) });
-            //res.json({status:"success", data:products});
-          } else {
-            res.json({ status: 'success', data: products });
-          }
-       
-    } catch (error) {
-        res.status(400).json({status:"error", message:error.message});
-    }
+  try {
+    const products = await productManager.getProducts();
+    //console.log("products",products);
+    res.render('home', { products });
+   
+ } catch (error) {
+      res.status(400).json({status:"error", message:error.message});
+ }
+  
 });
+
+router.get("/realtimeproducts", async(req,res)=>{
+   res.render("realTimeProducts");
+  
+});
+
+
 
 //trae producto solo por id
 router.get('/:pid', async (req, res) => {
@@ -116,6 +119,9 @@ router.delete('/:pid', async (req, res) => {
       res.status(400).json({ status: 'error', message: error.message });
     }
   });
+
+  export{router as productRouter};
+
 //   router.delete('/:pid', async (req, res) => {
 //     try {
 //       const pid = req.params.pid;
@@ -129,7 +135,7 @@ router.delete('/:pid', async (req, res) => {
 
 
 
-export{router as productRouter};
+
 
 //POSTMAN
 //http://localhost:8080/api/products/

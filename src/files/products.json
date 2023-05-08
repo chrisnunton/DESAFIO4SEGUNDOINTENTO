@@ -1,1 +1,14 @@
-[]
+[
+  {
+    "code": "001",
+    "name": "papaya",
+    "price": "12",
+    "id": 1
+  },
+  {
+    "code": "2",
+    "name": "camote",
+    "price": "1",
+    "id": 2
+  }
+]
